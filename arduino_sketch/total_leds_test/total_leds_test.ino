@@ -1,6 +1,7 @@
 #include <FastSPI_LED.h>
 
-#define NUM_LEDS 32
+#define NUM_LEDS 224
+//#define SERIAL_CHANNELS 17
 
 // Sometimes chipsets wire in a backwards sort of way
 struct CRGB { unsigned char b; unsigned char r; unsigned char g; };
@@ -10,16 +11,15 @@ struct CRGB *leds;
 //#define PIN 13
 
 int onSpeed = 75;
-int offSpeed = -20;
+int offSpeed = -10;
 int maxDimValue = 255;
 int minDimValue = 0;
 
-byte dimArray[NUM_LEDS];
-int lastTick = 0;
+float lastTick = 0;
 boolean blinkState = false;
 
 
-byte state = 0;
+int state = 1;
 
 void setup()
 {
@@ -41,32 +41,26 @@ void setup()
     
   Serial.begin( 115200 );
   Serial.println( "reset" );
-  
-  for ( int i = 0; i < NUM_LEDS; i++ )
-  {
-    dimArray[i] = 0;
-//    stateArray[i] = false;
-  }
-  
-    Serial.println( "done" );
-  
 
 }
 
 void loop() {
-  switch ( state )
+  if ( millis() - lastTick >= 100 )
   {
-    case 0 :
-      serialRead();
-      break;
-    case 1 :
-      blinkAll();
-      break;
-    case 2 :
-      increment();
-      break;
-    case 3 :
-      bitwiseConversionTest();
-      break;
+    blinkState = !blinkState;
+    lastTick = millis();
   }
+    
+  
+    
+  memset(leds, 0, (NUM_LEDS) * 3);
+  for ( int i = 0; i < NUM_LEDS; i++ )
+  {
+    leds[i].r = blinkState ? 1 : 0;
+  }
+  FastSPI_LED.show();
+  
+  delay( 1 );
+  
+  Serial.println( blinkState );
 }

@@ -16,20 +16,18 @@
 int lastRead = 0;
 String incomingString = "";
 int incomingIndex = 0;
-int incomingArray[SERIAL_CHANNELS];
+int incomingArray[NUM_LEDS/8];
 
 void serialRead() {
   if (Serial.available() > 0) {
     int incomingByte = Serial.read();
-    incomingArray[incomingIndex++] = incomingByte;
-    
-//    stateArray[incomingIndex] = boolean( incomingArray[incomingIndex] );
-    
-    if ( incomingIndex == SERIAL_CHANNELS ) {
+    incomingArray[incomingIndex++] = incomingByte;    
+    if ( incomingIndex == (NUM_LEDS/8) ) {
       
       lastRead = millis();
       incomingIndex = 0;
       deployInstruction();
+//      Serial.write( incomingArray[0] );
     }
     
     

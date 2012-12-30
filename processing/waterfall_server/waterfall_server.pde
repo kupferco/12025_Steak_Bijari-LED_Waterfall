@@ -22,7 +22,7 @@ Copyright:  Steak Studio Ltd 2012
 int FPSSize = 12;
 int[] window = { 1250, 740 };
 // grid = row / columns
-int[] grid = { 1, 64 };
+int[] grid = { 1, 32 };
 //int[] grid = { 2, 24 };
 int[] gridAnchor = { 30, 400 };
 int gridSpacing = 18;

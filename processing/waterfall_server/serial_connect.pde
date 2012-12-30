@@ -34,6 +34,7 @@ void initialiseSerial()
 void drawSerial()
 {
   sendSerialCommand();
+  readSerial();
 }
 
 int state = 0;
@@ -46,12 +47,18 @@ void sendSerialCommand()
   {
     arduinoController.write( compiledGrid[i] );
   }
-  
-//  println( compiledGrid );
-
-
 
 // TEST SCRIPT
+  
+//  println( compiledGrid );
 //  arduinoController.write( 1 );
   
+}
+
+void readSerial()
+{
+  if ( arduinoController.available() > 0 )
+  {
+//    println( arduinoController.read() );
+  }
 }
