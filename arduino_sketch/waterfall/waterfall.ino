@@ -1,10 +1,13 @@
 #include <FastSPI_LED.h>
 
 #define NUM_LEDS 32
+#define STRIP_LENGTH 32
+#define MESSAGE_LENGTH ((NUM_LEDS/8)+2)
+
 
 // Sometimes chipsets wire in a backwards sort of way
-struct CRGB { unsigned char b; unsigned char r; unsigned char g; };
-// struct CRGB { unsigned char r; unsigned char g; unsigned char b; };
+//struct CRGB { unsigned char b; unsigned char r; unsigned char g; };
+ struct CRGB { unsigned char r; unsigned char g; unsigned char b; };
 struct CRGB *leds;
 
 //#define PIN 13
@@ -15,11 +18,17 @@ int maxDimValue = 255;
 int minDimValue = 0;
 
 byte dimArray[NUM_LEDS];
-int lastTick = 0;
+float lastTick = 0;
 boolean blinkState = false;
+boolean serialReadDone = false;
 
 
-byte state = 0;
+// sendSerial = 0
+// deployInstructoin = 1
+// requestNext = 2
+// handShake = 3
+// blinkAll = 4
+byte state = 3;
 
 void setup()
 {
@@ -37,7 +46,7 @@ void setup()
   FastSPI_LED.init();
   FastSPI_LED.start();
 
-  leds = (struct CRGB*)FastSPI_LED.getRGBData();
+  leds = (struct CRGB*)FastSPI_LED.getRGBData();  
     
   Serial.begin( 115200 );
   Serial.println( "reset" );
@@ -60,12 +69,21 @@ void loop() {
       serialRead();
       break;
     case 1 :
-      blinkAll();
+      deployInstruction();
       break;
     case 2 :
-      increment();
+      requestNext();
       break;
     case 3 :
+      handShake();
+      break;
+    case 4:
+      blinkAll();
+      break;
+    case 5 :
+      increment();
+      break;
+    case 6 :
       bitwiseConversionTest();
       break;
   }

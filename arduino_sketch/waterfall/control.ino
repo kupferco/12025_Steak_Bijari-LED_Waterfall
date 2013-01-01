@@ -3,15 +3,14 @@ void deployInstruction()
   memset(leds, 0, NUM_LEDS * 3);
   for ( int i = 0; i < NUM_LEDS; i++ )
   {
-    leds[i].r = getValue( i );
-    Serial.write( getValue(0) );
+    leds[i].b = getValue( i );
+//    Serial.write( getValue(0) );
   }
   FastSPI_LED.show();
   
   delay( 1 );
+  state = 2; // REQUEST NEXT INSTRUCTION
 }
-
-
 
 int getValue( int id )
 {
