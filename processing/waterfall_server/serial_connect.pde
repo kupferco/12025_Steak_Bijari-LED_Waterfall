@@ -34,23 +34,24 @@ void initialiseSerial()
 
 void drawSerial()
 {
-  if ( sendSerialCommandGO )
-    sendSerialCommand();
-  else
-    readSerial();
+  sendSerialCommand();
 }
 
 int state = 0;
 int counting = 0;
+
+
+public static final char HEADER = '|';
+public static final char TAG    = 'T';
+
 void sendSerialCommand()
 {
-  println("SEND SERIAL");
   int[] compiledGrid = compileGrid();
   
 //  println( compiledGrid.length );
   
-  arduinoController.write( 250 );
-//  arduinoController.write( 0 );
+  arduinoController.write(HEADER);
+  arduinoController.write(TAG);
   for ( int i=0; i < compiledGrid.length; i++ )
   {
     arduinoController.write( compiledGrid[i] );
@@ -60,40 +61,17 @@ void sendSerialCommand()
 
 // TEST SCRIPT
   
-//  println( compiledGrid );
+  println( "PROCESSING :: " + compiledGrid[1] );
 //  arduinoController.write( 1 );
   
 }
 
-void readSerial()
+void serialEvent(Serial p)
 {
-  int read0 = arduinoController.read();
-  int read1 = arduinoController.read();
-  
-  if ( arduinoController.available() > 0 )
+  // handle incoming serial data
+  String inString = arduinoController.readStringUntil('\n');
+  if ( inString != null )
   {
-    switch ( read0 )
-    {
-      case 3 :
-        sendSerialCommandGO = true;
-        break;
-      case 1 :
-        arduinoController.write( 2 );
-        println( "2 SENT" );
-        sendSerialCommandGO = true;
-        break;
-    }
+      println( "ARDUINO:: " + inString );   // echo text string from Arduino
   }
-  
-  println( "0 :: " + read0 );
-  println( "1 :: " + read1 + "\n\n" );
 }
-
-//void handShake()
-//{
-//  if ( arduinoController.available() > 0 )
-//  {
-//    if ( arduinoController.read() == 251 )
-//      state = 3;
-//  }  
-//}

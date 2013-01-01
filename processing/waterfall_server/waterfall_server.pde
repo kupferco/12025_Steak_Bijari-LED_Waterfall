@@ -22,7 +22,7 @@ Copyright:  Steak Studio Ltd 2012
 int FPSSize = 12;
 int[] window = { 1250, 740 };
 // grid = row / columns
-int[] grid = { 1, 32 };
+int[] grid = { 1, 192 };
 //int[] grid = { 2, 24 };
 int[] gridAnchor = { 30, 400 };
 int gridSpacing = 18;
@@ -71,7 +71,7 @@ void setup()
   //println(fontList);
   font = createFont("Cuba-48.vlw", 32);
 
-  frameRate( 200 );
+  frameRate( 30 );
 
   initialiseServer();
   

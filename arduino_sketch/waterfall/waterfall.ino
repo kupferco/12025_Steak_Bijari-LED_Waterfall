@@ -1,13 +1,13 @@
 #include <FastSPI_LED.h>
 
-#define NUM_LEDS 32
-#define STRIP_LENGTH 32
-#define MESSAGE_LENGTH ((NUM_LEDS/8)+2)
+#define NUM_LEDS 192
+//#define STRIP_LENGTH 32
+//#define MESSAGE_LENGTH ((NUM_LEDS/8)+2)
 
 
 // Sometimes chipsets wire in a backwards sort of way
 //struct CRGB { unsigned char b; unsigned char r; unsigned char g; };
- struct CRGB { unsigned char r; unsigned char g; unsigned char b; };
+struct CRGB { unsigned char r; unsigned char g; unsigned char b; };
 struct CRGB *leds;
 
 //#define PIN 13
@@ -23,12 +23,12 @@ boolean blinkState = false;
 boolean serialReadDone = false;
 
 
-// sendSerial = 0
+// serialRead = 0
 // deployInstructoin = 1
 // requestNext = 2
 // handShake = 3
 // blinkAll = 4
-byte state = 3;
+byte state = 0;
 
 void setup()
 {
@@ -70,12 +70,6 @@ void loop() {
       break;
     case 1 :
       deployInstruction();
-      break;
-    case 2 :
-      requestNext();
-      break;
-    case 3 :
-      handShake();
       break;
     case 4:
       blinkAll();

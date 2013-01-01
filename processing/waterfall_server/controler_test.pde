@@ -15,7 +15,7 @@ Copyright:  Steak Studio Ltd 2012
 int controllerTestX, controllerTestY;
 
 int speed = 12;
-int xWidth = 500;
+int xWidth = 700;
 int yHeight = 280;
 
 void initialiseControllerTest()

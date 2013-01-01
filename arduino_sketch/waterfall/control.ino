@@ -9,7 +9,7 @@ void deployInstruction()
   FastSPI_LED.show();
   
   delay( 1 );
-  state = 2; // REQUEST NEXT INSTRUCTION
+  //state = 2; // REQUEST NEXT INSTRUCTION
 }
 
 int getValue( int id )
@@ -33,14 +33,6 @@ int getValue( int id )
     itemDim = minDimValue;
   
   dimArray[id] = byte( itemDim );
-
-
-//  dimArray[id] += ( itemState ) ? 75 : -10;
-//
-//  if ( dimArray[id] > 255 - 76 )
-//    dimArray[id] = 255;
-//  if ( dimArray[id] < 11 )
-//    dimArray[id] = 0;
     
   return dimArray[id];
 }
