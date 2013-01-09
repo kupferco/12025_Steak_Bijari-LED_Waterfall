@@ -14,7 +14,7 @@ Copyright:  Steak Studio Ltd 2012
 
 int controllerTestX, controllerTestY;
 
-int speed = 12;
+int speed = 20;
 int xWidth = 700;
 int yHeight = 280;
 
@@ -33,7 +33,7 @@ void controllerTest()
   if ( controllerTestX >= xWidth )
   {
     controllerTestX = gridAnchor[0];
-    controllerTestY += gridSpacing;
+    controllerTestY += gridSpacing[1];
     if ( controllerTestY >= yHeight )
       controllerTestY = gridAnchor[1];
   }

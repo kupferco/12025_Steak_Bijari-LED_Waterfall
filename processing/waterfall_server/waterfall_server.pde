@@ -19,13 +19,13 @@ Copyright:  Steak Studio Ltd 2012
 // GRID CONFIG
 // -----------------------------
 
-int FPSSize = 12;
+int FPSSize = 7;
 int[] window = { 1250, 740 };
 // grid = row / columns
-int[] grid = { 1, 192 };
+int[] grid = { 96, 8 };
 //int[] grid = { 2, 24 };
-int[] gridAnchor = { 30, 400 };
-int gridSpacing = 18;
+int[] gridAnchor = { 100, 30 };
+int[] gridSpacing = { 150, 7 };
 color gridColour = color( 255, 0, 255 );
 color backgroundColour = color( 30 );
 int jetDiameter = 10;

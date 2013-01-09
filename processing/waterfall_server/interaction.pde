@@ -15,7 +15,7 @@ int mousex, mousey;
 void interaction()
 {
   fill( 255 );
-  rect( mousex, 0, fingerWidth, window[1] );
+  rect( 0, mouseY, window[0], fingerWidth );
   fill( gridColour );
 }
 

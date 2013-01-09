@@ -65,11 +65,11 @@ class GridUnit
 void initialiseGrid()
 {
 	int count = -1;
-	for ( int r = 0; r < grid[0]; r++ )
+	for ( int c = 0; c < grid[1]; c++ )
 	{
-		for ( int c = 0; c < grid[1]; c++ )
+		for ( int r = 0; r < grid[0]; r++ )
 		{
-			gridArray[ ++count ] = new GridUnit( count, gridAnchor[0] + (c * gridSpacing), gridAnchor[1] + (r * gridSpacing) );
+			gridArray[ ++count ] = new GridUnit( count, gridAnchor[0] + (c * gridSpacing[0]), gridAnchor[1] + (r * gridSpacing[1]) );
 		}
 	}
 }

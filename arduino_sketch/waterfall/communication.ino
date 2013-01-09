@@ -40,7 +40,8 @@ void serialRead() {
         
         deployInstruction();
         
-        Serial.println( incomingArray[1] );
+        // TEST
+//        Serial.println( incomingArray[1] );
       }
       else
       {
